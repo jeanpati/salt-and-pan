@@ -11,12 +11,12 @@ export const UserNav = () => {
         </Link>
       </li>
       <li className="navbar-item">
-        <Link className="navbar-link" to="/">
+        <Link className="navbar-link" to="/myrecipes">
           My Recipes
         </Link>
       </li>
       <li className="navbar-item">
-        <Link className="navbar-link" to="/">
+        <Link className="navbar-link" to="/favorites">
           Favorites
         </Link>
       </li>
@@ -25,14 +25,18 @@ export const UserNav = () => {
           Search
         </Link>
       </li>
+      <li className="navbar-item">
+        <Link className="navbar-link" to="/profile">
+          Profile
+        </Link>
+      </li>
       {localStorage.getItem("salt_user") ? (
         <li className="navbar-item navbar-logout">
           <Link
             className="navbar-link"
-            to=""
+            to="/login"
             onClick={() => {
               localStorage.removeItem("salt_user");
-              navigate("/", { replace: true });
             }}
           >
             Logout

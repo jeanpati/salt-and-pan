@@ -3,6 +3,7 @@ import { getAllPosts } from "../../services/postService";
 import { Post } from "./Post";
 import { getAllCategories } from "../../services/categoryService";
 import { PostFilterBar } from "./PostFilterBar";
+import { Link } from "react-router-dom";
 
 export const PostList = () => {
   const [allPosts, setAllPosts] = useState([]);
@@ -53,7 +54,11 @@ export const PostList = () => {
       <div className="posts-container">
         <article className="posts">
           {filteredPosts.map((postObj) => {
-            return <Post post={postObj} key={postObj.id} />;
+            return (
+              <Link to={`/posts/${postObj.id}`} key={postObj.id}>
+                <Post post={postObj} />
+              </Link>
+            );
           })}
         </article>
       </div>

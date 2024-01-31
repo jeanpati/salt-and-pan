@@ -1,4 +1,4 @@
-import { UserNav } from "../nav/GeneralNav";
+import { UserNav } from "../nav/UserNav";
 import { PostList } from "../posts/PostList";
 
 export const UserSearch = () => {

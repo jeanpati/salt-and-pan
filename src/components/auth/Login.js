@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { getUserByEmail } from "../../services/userService";
+import { GeneralNav } from "../nav/GeneralNav";
 
 export const Login = () => {
   const [email, set] = useState("sophia.turner@example.com");
@@ -30,6 +31,7 @@ export const Login = () => {
 
   return (
     <main className="container-login">
+      <GeneralNav />
       <section>
         <form className="form-login" onSubmit={handleLogin}>
           <h1>Salt and Pan</h1>

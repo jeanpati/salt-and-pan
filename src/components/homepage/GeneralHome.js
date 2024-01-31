@@ -1,4 +1,3 @@
-import { GeneralNav } from "../nav/GeneralNav";
 import { PostList } from "../posts/PostList";
 
 import("./Home.css");
@@ -6,7 +5,6 @@ import("./Home.css");
 export const GeneralHome = () => {
   return (
     <section className="home-container">
-      <GeneralNav />
       <h1>
         <span>Salt and Pan</span>
       </h1>

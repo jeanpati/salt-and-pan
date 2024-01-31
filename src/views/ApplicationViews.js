@@ -12,9 +12,9 @@ export const ApplicationViews = () => {
     setCurrentUser(saltUserObject);
   }, []);
 
-  return currentUser ? (
-    <GeneralViews currentUser={currentUser} />
-  ) : (
+  return localStorage?.getItem("salt_user") ? (
     <UserViews currentUser={currentUser} />
+  ) : (
+    <GeneralViews />
   );
 };

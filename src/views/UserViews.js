@@ -1,6 +1,7 @@
 import { Outlet, Route, Routes } from "react-router-dom";
-import { Home } from "../components/homepage/GeneralHome";
+
 import { UserNav } from "../components/nav/UserNav";
+import { UserHome } from "../components/homepage/UserHome";
 
 export const UserViews = ({ currentUser }) => {
   return (
@@ -14,7 +15,7 @@ export const UserViews = ({ currentUser }) => {
           </>
         }
       >
-        <Route index element={<Home />} />
+        <Route index element={<UserHome />} />
       </Route>
     </Routes>
   );
