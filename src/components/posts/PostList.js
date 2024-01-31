@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getAllPosts } from "../../services/postService";
 import { Post } from "./Post";
 import { getAllCategories } from "../../services/categoryService";
+import { PostFilterBar } from "./PostFilterBar";
 
 export const PostList = () => {
   const [allPosts, setAllPosts] = useState([]);
@@ -44,15 +45,11 @@ export const PostList = () => {
 
   return (
     <div>
-      <input
-        onChange={(e) => {
-          setSearchTerm(e.target.value);
-        }}
-        type="text"
-        placeholder="Search Posts By Title"
-        className="post-search"
-      ></input>
-
+      <PostFilterBar
+        setChosenCategoryOnly={setChosenCategoryOnly}
+        setSearchTerm={setSearchTerm}
+        allCategories={allCategories}
+      />
       <div className="posts-container">
         <article className="posts">
           {filteredPosts.map((postObj) => {

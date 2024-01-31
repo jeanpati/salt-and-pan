@@ -1,12 +1,12 @@
-import { GeneralNav } from "../nav/GeneralNav";
+import { UserNav } from "../nav/UserNav";
 import { PostList } from "../posts/PostList";
 
 import("./Home.css");
 
-export const Home = () => {
+export const UserHome = () => {
   return (
     <section className="home-container">
-      <GeneralNav />
+      <UserNav />
       <h1>
         <span>Salt and Pan</span>
       </h1>
