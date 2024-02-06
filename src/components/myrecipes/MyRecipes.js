@@ -17,13 +17,6 @@ export const MyRecipes = ({ currentUser }) => {
 
   const navigate = useNavigate();
 
-  //   useEffect(() => {
-  //     getPostById(20).then((data) => {
-  //       const fetched = data;
-  //       setPost(fetched);
-  //     });
-  //   }, []);
-
   const getAndSetPosts = () => {
     getMyPosts(currentUser.id).then((myPostsArr) => {
       setMyPosts(myPostsArr);
