@@ -12,10 +12,14 @@ export const PostList = () => {
   const [showChosenCategoryOnly, setChosenCategoryOnly] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
 
-  useEffect(() => {
+  const getAndSetPosts = () => {
     getAllPosts().then((allPostsArr) => {
       setAllPosts(allPostsArr);
     });
+  };
+
+  useEffect(() => {
+    getAndSetPosts();
   }, []);
 
   useEffect(() => {

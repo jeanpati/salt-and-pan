@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react";
-import "./Form.css";
 import { getAllCategories } from "../services/categoryService";
-import { createPost } from "../services/postService";
-import { useNavigate } from "react-router-dom";
-export const PostForm = ({ currentUser }) => {
-  const [post, setPost] = useState({
-    title: "",
-    body: "",
-    isTesting: false,
-    isPrivate: false,
-    img_src: "",
-    categoryId: 0,
-  });
+import { editPost, getPostById } from "../services/postService";
+import { useNavigate, useParams } from "react-router-dom";
+import "./Form.css";
+
+export const EditPostForm = ({ currentUser }) => {
+  const [post, setPost] = useState({});
   const [allCategories, setAllCategories] = useState([]);
+  const { id } = useParams();
+
+  useEffect(() => {
+    getPostById(id).then((data) => {
+      const p = data[0];
+      setPost(p);
+    });
+  }, [id]);
 
   const navigate = useNavigate();
+
   useEffect(() => {
     getAllCategories().then((allCategoriesArr) => {
       setAllCategories(allCategoriesArr);
@@ -23,21 +26,36 @@ export const PostForm = ({ currentUser }) => {
 
   const handleSave = (e) => {
     e.preventDefault();
+
     if (post.title && post.body && post.categoryId && post.img_src) {
-      const newPost = {
+      const editedPost = {
+        id: id,
         title: post.title,
         body: post.body,
         isTesting: post.isTesting,
         isPrivate: post.isPrivate,
         img_src: post.img_src,
-        created: new Date(),
+        created: post.created,
+        lastEdited: new Date(),
         userId: currentUser.id,
         categoryId: post.categoryId,
       };
-      createPost(newPost).then(navigate("/myrecipes"));
+      editPost(editedPost).then(navigate("/myrecipes"));
     } else {
-      window.alert("Please complete all fields");
+      window.alert("Please make sure all fields are completed");
     }
+  };
+
+  const handleInputChange = (e) => {
+    const stateCopy = { ...post };
+    stateCopy[e.target.name] = e.target.value;
+    setPost(stateCopy);
+  };
+
+  const handleCheckbox = (e) => {
+    const stateCopy = { ...post };
+    stateCopy[e.target.name] = e.target.checked;
+    setPost(stateCopy);
   };
 
   return (
@@ -47,11 +65,10 @@ export const PostForm = ({ currentUser }) => {
         <div className="form-group">
           <select
             className="form-control"
-            onChange={(e) => {
-              const copy = { ...post };
-              copy.categoryId = e.target.value;
-              setPost(copy);
-            }}
+            name="categoryId"
+            onChange={handleInputChange}
+            value={post.categoryId ? post.categoryId : ""}
+            required
           >
             <option value="0">Set category</option>$
             {allCategories.map((catObj) => {
@@ -71,12 +88,11 @@ export const PostForm = ({ currentUser }) => {
           <input
             type="text"
             className="form-control"
+            name="title"
             placeholder="Enter Title"
-            onChange={(e) => {
-              const copy = { ...post };
-              copy.title = e.target.value;
-              setPost(copy);
-            }}
+            onChange={handleInputChange}
+            value={post.title ? post.title : ""}
+            required
           />
         </div>
       </fieldset>
@@ -87,12 +103,11 @@ export const PostForm = ({ currentUser }) => {
           <input
             type="text"
             className="form-control"
+            name="img_src"
             placeholder="Enter link to image"
-            onChange={(e) => {
-              const copy = { ...post };
-              copy.img_src = e.target.value;
-              setPost(copy);
-            }}
+            onChange={handleInputChange}
+            value={post.img_src ? post.img_src : ""}
+            required
           />
         </div>
       </fieldset>
@@ -103,31 +118,30 @@ export const PostForm = ({ currentUser }) => {
           <input
             type="text"
             className="form-control"
+            name="body"
             placeholder="Enter your recipe"
-            onChange={(e) => {
-              const copy = { ...post };
-              copy.body = e.target.value;
-              setPost(copy);
-            }}
+            onChange={handleInputChange}
+            value={post.body ? post.body : ""}
+            required
           />
         </div>
       </fieldset>
+
       <fieldset>
         <div className="form-group">
           <label>
-            Make Public :
+            Make Private :
             <input
               type="checkbox"
               className="form-control"
-              onChange={(e) => {
-                const copy = { ...post };
-                copy.isPrivate = e.target.checked;
-                setPost(copy);
-              }}
+              name="isPrivate"
+              checked={post.isPrivate ? post.isPrivate : ""}
+              onChange={handleCheckbox}
             />
           </label>
         </div>
       </fieldset>
+
       <fieldset>
         <div className="form-group">
           <label>
@@ -135,15 +149,14 @@ export const PostForm = ({ currentUser }) => {
             <input
               type="checkbox"
               className="form-control"
-              onChange={(e) => {
-                const copy = { ...post };
-                copy.isTesting = e.target.checked;
-                setPost(copy);
-              }}
+              name="isTesting"
+              checked={post.isTesting ? post.isTesting : ""}
+              onChange={handleCheckbox}
             />
           </label>
         </div>
       </fieldset>
+
       <fieldset>
         <div className="form-group">
           <button onClick={handleSave}>Save</button>

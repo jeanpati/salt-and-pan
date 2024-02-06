@@ -7,6 +7,7 @@ import { UserSearch } from "../components/search/UserSearch";
 import { Favorites } from "../components/favorites/Favorites";
 import { Profile } from "../components/profile/Profile";
 import { PostForm } from "../forms/PostForm";
+import { EditPostForm } from "../forms/EditPostForm";
 
 export const UserViews = ({ currentUser }) => {
   return (
@@ -35,6 +36,12 @@ export const UserViews = ({ currentUser }) => {
         </Route>
         <Route path="newpost">
           <Route index element={<PostForm currentUser={currentUser} />} />
+        </Route>
+        <Route path="editpost">
+          <Route index element={<EditPostForm currentUser={currentUser} />} />
+        </Route>
+        <Route path="posts/edit/:id">
+          <Route index element={<EditPostForm currentUser={currentUser} />} />
         </Route>
       </Route>
     </Routes>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { getMyPosts } from "../../services/postService";
+import { deletePost, getMyPosts } from "../../services/postService";
 import { getAllCategories } from "../../services/categoryService";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { PostFilterBar } from "../posts/PostFilterBar";
 import { Post } from "../posts/Post";
 
@@ -12,10 +12,26 @@ export const MyRecipes = ({ currentUser }) => {
   const [showChosenCategoryOnly, setChosenCategoryOnly] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
 
-  useEffect(() => {
+  //   const [privatePost, setPrivatePost] = useState([]);
+  //   const [testing, setTesting] = useState([]);
+
+  const navigate = useNavigate();
+
+  //   useEffect(() => {
+  //     getPostById(20).then((data) => {
+  //       const fetched = data;
+  //       setPost(fetched);
+  //     });
+  //   }, []);
+
+  const getAndSetPosts = () => {
     getMyPosts(currentUser.id).then((myPostsArr) => {
       setMyPosts(myPostsArr);
     });
+  };
+
+  useEffect(() => {
+    getAndSetPosts();
   }, [currentUser.id]);
 
   useEffect(() => {
@@ -44,8 +60,26 @@ export const MyRecipes = ({ currentUser }) => {
     setFilteredPosts(foundPosts);
   }, [searchTerm, myPosts]);
 
+  const handleDelete = (e) => {
+    deletePost(e.target.value).then(() => {
+      getAndSetPosts();
+    });
+  };
+
+  const handleEdit = (e) => {
+    navigate(`/posts/edit/${e.target.value}`);
+  };
+
   return (
     <div>
+      <button
+        className="create-btn"
+        onClick={() => {
+          navigate("/newpost");
+        }}
+      >
+        Create Recipe
+      </button>
       <PostFilterBar
         setChosenCategoryOnly={setChosenCategoryOnly}
         setSearchTerm={setSearchTerm}
@@ -55,9 +89,27 @@ export const MyRecipes = ({ currentUser }) => {
         <article className="posts">
           {filteredPosts.map((postObj) => {
             return (
-              <Link to={`/posts/${postObj.id}`} key={postObj.id}>
-                <Post post={postObj} />
-              </Link>
+              <div className="post-card" key={postObj.id}>
+                <Link to={`/posts/${postObj.id}`}>
+                  <Post post={postObj}></Post>
+                </Link>
+                <button
+                  className="edit-btn"
+                  onClick={handleEdit}
+                  value={postObj.id}
+                >
+                  Edit
+                </button>
+                <div className="btn-container">
+                  <button
+                    className="delete-btn"
+                    value={postObj.id}
+                    onClick={handleDelete}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
             );
           })}
         </article>

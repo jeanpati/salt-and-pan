@@ -1,10 +1,10 @@
 export const Post = ({ post }) => {
   return (
-    <section className="post-card" key={post.id}>
-      <div className="topic-card">
-        <div className="topic-name">{post.title}</div>
+    <section key={post.id}>
+      <div>
+        <div className="title">{post.title}</div>
       </div>
-      <div className="title-text">
+      <div className="image">
         <img src={post.img_src} alt="" />
       </div>
       <div className="likes">

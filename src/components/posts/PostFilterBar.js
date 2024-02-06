@@ -1,10 +1,8 @@
-import { useNavigate } from "react-router-dom";
 export const PostFilterBar = ({
   setChosenCategoryOnly,
   setSearchTerm,
   allCategories,
 }) => {
-  const navigate = useNavigate();
   return (
     <div className="filter-bar">
       <select
@@ -30,14 +28,6 @@ export const PostFilterBar = ({
         placeholder="Search Posts By Title"
         className="post-search"
       ></input>
-      <button
-        className="create-btn"
-        onClick={() => {
-          navigate("/newpost");
-        }}
-      >
-        Create Recipe
-      </button>
     </div>
   );
 };
