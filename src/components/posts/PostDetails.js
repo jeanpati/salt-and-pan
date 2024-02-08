@@ -5,7 +5,7 @@ import { createLike } from "../../services/likesService";
 
 export const PostDetails = ({ currentUser }) => {
   const [clickedPost, setClickedPost] = useState({});
-  const [date, setDate] = useState(null);
+  const [date, setDate] = useState(new Date());
   const { id } = useParams();
 
   const getAndSetPost = () => {
@@ -27,9 +27,15 @@ export const PostDetails = ({ currentUser }) => {
   };
 
   useEffect(() => {
-    const longDate = clickedPost?.created;
-    const newDate = Date(longDate);
-    setDate(newDate);
+    if (clickedPost.created) {
+      const createdDate = new Date(clickedPost.created);
+      const formatted = Intl.DateTimeFormat("en-US", {
+        month: "long",
+        day: "2-digit",
+        year: "numeric",
+      }).format(createdDate);
+      setDate(formatted);
+    }
   }, [clickedPost]);
 
   const handleLike = (e) => {
@@ -47,13 +53,16 @@ export const PostDetails = ({ currentUser }) => {
         <h2 className="title">{clickedPost?.title}</h2>
       </div>
       <div>
-        <div className="date">{date}</div>
+        <div className="date">{date.toString()}</div>
       </div>
       <div>
         <span></span>
       </div>
       <div className="image">
         <img src={clickedPost.img_src} alt="" />
+      </div>
+      <div className="body">
+        <div>{clickedPost.body} </div>
       </div>
       <div>
         <button onClick={handleLike} value={clickedPost.id}>

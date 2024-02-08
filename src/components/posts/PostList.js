@@ -15,6 +15,12 @@ export const PostList = ({ currentUser }) => {
   const getAndSetPosts = () => {
     getAllPosts().then((allPostsArr) => {
       setAllPosts(allPostsArr);
+
+      //   for (const post of allPosts) {
+      //     if (post.isPrivate === true) {
+      //       allPosts.splice(post);
+      //     }
+      //   }
     });
   };
 
