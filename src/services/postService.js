@@ -1,5 +1,7 @@
 export const getAllPosts = () => {
-  return fetch(`http://localhost:8088/posts`).then((res) => res.json());
+  return fetch(`http://localhost:8088/posts?_embed=likes`).then((res) =>
+    res.json()
+  );
 };
 
 export const getMyPosts = (userId) => {
@@ -19,8 +21,8 @@ export const createPost = (post) => {
 };
 
 export const getPostById = (postId) => {
-  return fetch(`http://localhost:8088/posts?id=${postId}`).then((res) =>
-    res.json()
+  return fetch(`http://localhost:8088/posts/${postId}?_embed=likes`).then(
+    (res) => res.json()
   );
 };
 

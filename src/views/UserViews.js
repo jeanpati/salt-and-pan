@@ -9,6 +9,7 @@ import { Profile } from "../components/profile/Profile";
 import { PostForm } from "../forms/PostForm";
 import { EditPostForm } from "../forms/EditPostForm";
 import { EditProfileForm } from "../forms/EditProfileForm";
+import { PostDetails } from "../components/posts/PostDetails";
 
 export const UserViews = ({ currentUser }) => {
   return (
@@ -22,7 +23,7 @@ export const UserViews = ({ currentUser }) => {
           </>
         }
       >
-        <Route index element={<UserHome />} />
+        <Route index element={<UserHome currentUser={currentUser} />} />
         <Route path="myrecipes">
           <Route index element={<MyRecipes currentUser={currentUser} />} />
         </Route>
@@ -37,6 +38,9 @@ export const UserViews = ({ currentUser }) => {
         </Route>
         <Route path="newpost">
           <Route index element={<PostForm currentUser={currentUser} />} />
+        </Route>
+        <Route path="posts/:id">
+          <Route index element={<PostDetails currentUser={currentUser} />} />
         </Route>
         <Route path="posts/edit/:id">
           <Route index element={<EditPostForm currentUser={currentUser} />} />

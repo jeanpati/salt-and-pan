@@ -3,9 +3,9 @@ import { getAllPosts } from "../../services/postService";
 import { Post } from "./Post";
 import { getAllCategories } from "../../services/categoryService";
 import { PostFilterBar } from "./PostFilterBar";
-import { Link } from "react-router-dom";
+import { createLike } from "../../services/likesService";
 
-export const PostList = () => {
+export const PostList = ({ currentUser }) => {
   const [allPosts, setAllPosts] = useState([]);
   const [allCategories, setAllCategories] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
@@ -48,6 +48,16 @@ export const PostList = () => {
     setFilteredPosts(foundPosts);
   }, [searchTerm, allPosts]);
 
+  const handleLike = (e) => {
+    const likedPost = {
+      postId: parseInt(e.target.value),
+      userId: currentUser.id,
+    };
+    createLike(likedPost).then(() => {
+      getAndSetPosts();
+    });
+  };
+
   return (
     <div>
       <PostFilterBar
@@ -59,9 +69,12 @@ export const PostList = () => {
         <article className="posts">
           {filteredPosts.map((postObj) => {
             return (
-              <Link to={`/posts/${postObj.id}`} key={postObj.id}>
-                <Post post={postObj} />
-              </Link>
+              <div key={postObj.id}>
+                <Post post={postObj} currentUser={currentUser} />
+                <button onClick={handleLike} value={postObj.id}>
+                  Like
+                </button>
+              </div>
             );
           })}
         </article>

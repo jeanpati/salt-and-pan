@@ -2,14 +2,14 @@ import { PostList } from "../posts/PostList";
 
 import("./Home.css");
 
-export const UserHome = () => {
+export const UserHome = ({ currentUser }) => {
   return (
     <section className="home-container">
       <h1>
         <span>Salt and Pan</span>
       </h1>
       <h2>Popular Posts</h2>
-      <PostList />
+      <PostList currentUser={currentUser} />
       <h2>Featured Posts</h2>
     </section>
   );

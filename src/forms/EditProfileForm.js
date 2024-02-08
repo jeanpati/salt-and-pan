@@ -15,17 +15,18 @@ export const EditProfileForm = ({ currentUser }) => {
 
   const handleSave = (e) => {
     e.preventDefault();
-
-    const editedUser = {
-      id: user.id,
-      username: user.username,
-      email: user.email,
-      bio: user.bio,
-      created: user.created,
-    };
-    editUser(editedUser).then(() => {
-      navigate(`/profile`);
-    });
+    if (user.username && user.email && user.bio) {
+      const editedUser = {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        bio: user.bio,
+        created: user.created,
+      };
+      editUser(editedUser).then(() => {
+        navigate(`/profile`);
+      });
+    }
   };
 
   const handleInputChange = (event) => {
@@ -43,7 +44,7 @@ export const EditProfileForm = ({ currentUser }) => {
           <input
             type="text"
             name="username"
-            value={user.username}
+            value={user.username ? user.username : ""}
             onChange={handleInputChange}
             required
             className="form-control"
@@ -56,7 +57,7 @@ export const EditProfileForm = ({ currentUser }) => {
           <input
             type="text"
             name="email"
-            value={user.email}
+            value={user.email ? user.email : ""}
             onChange={handleInputChange}
             required
             className="form-control"

@@ -11,7 +11,7 @@ export const EditPostForm = ({ currentUser }) => {
 
   useEffect(() => {
     getPostById(id).then((data) => {
-      const p = data[0];
+      const p = data;
       setPost(p);
     });
   }, [id]);
@@ -30,7 +30,7 @@ export const EditPostForm = ({ currentUser }) => {
     if (post.title && post.body && post.categoryId && post.img_src) {
       const editedPost = {
         id: id,
-        title: post.title,
+        title: post?.title,
         body: post.body,
         isTesting: post.isTesting,
         isPrivate: post.isPrivate,
@@ -67,7 +67,7 @@ export const EditPostForm = ({ currentUser }) => {
             className="form-control"
             name="categoryId"
             onChange={handleInputChange}
-            value={post.categoryId ? post.categoryId : ""}
+            value={post?.categoryId ? post.categoryId : ""}
             required
           >
             <option value="0">Set category</option>$
@@ -91,7 +91,7 @@ export const EditPostForm = ({ currentUser }) => {
             name="title"
             placeholder="Enter Title"
             onChange={handleInputChange}
-            value={post.title ? post.title : ""}
+            value={post?.title ? post.title : ""}
             required
           />
         </div>
@@ -106,7 +106,7 @@ export const EditPostForm = ({ currentUser }) => {
             name="img_src"
             placeholder="Enter link to image"
             onChange={handleInputChange}
-            value={post.img_src ? post.img_src : ""}
+            value={post?.img_src ? post.img_src : ""}
             required
           />
         </div>
@@ -121,7 +121,7 @@ export const EditPostForm = ({ currentUser }) => {
             name="body"
             placeholder="Enter your recipe"
             onChange={handleInputChange}
-            value={post.body ? post.body : ""}
+            value={post?.body ? post.body : ""}
             required
           />
         </div>
@@ -135,7 +135,7 @@ export const EditPostForm = ({ currentUser }) => {
               type="checkbox"
               className="form-control"
               name="isPrivate"
-              checked={post.isPrivate ? post.isPrivate : ""}
+              checked={post?.isPrivate ? post.isPrivate : ""}
               onChange={handleCheckbox}
             />
           </label>
@@ -150,7 +150,7 @@ export const EditPostForm = ({ currentUser }) => {
               type="checkbox"
               className="form-control"
               name="isTesting"
-              checked={post.isTesting ? post.isTesting : ""}
+              checked={post?.isTesting ? post.isTesting : ""}
               onChange={handleCheckbox}
             />
           </label>

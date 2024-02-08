@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { deletePost, getMyPosts } from "../../services/postService";
 import { getAllCategories } from "../../services/categoryService";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { PostFilterBar } from "../posts/PostFilterBar";
 import { Post } from "../posts/Post";
 
@@ -12,10 +12,26 @@ export const MyRecipes = ({ currentUser }) => {
   const [showChosenCategoryOnly, setChosenCategoryOnly] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
 
-  //   const [privatePost, setPrivatePost] = useState([]);
-  //   const [testing, setTesting] = useState([]);
-
   const navigate = useNavigate();
+
+  const privateLabel = (postObj) => {
+    if (postObj.isPrivate === true) {
+      return (
+        <div>
+          <label>Private</label>
+        </div>
+      );
+    }
+  };
+  const testingLabel = (postObj) => {
+    if (postObj.isTesting === true) {
+      return (
+        <div>
+          <label>Testing</label>
+        </div>
+      );
+    }
+  };
 
   const getAndSetPosts = () => {
     getMyPosts(currentUser.id).then((myPostsArr) => {
@@ -83,9 +99,9 @@ export const MyRecipes = ({ currentUser }) => {
           {filteredPosts.map((postObj) => {
             return (
               <div className="post-card" key={postObj.id}>
-                <Link to={`/posts/${postObj.id}`}>
-                  <Post post={postObj}></Post>
-                </Link>
+                <Post post={postObj} currentUser={currentUser}></Post>
+                {privateLabel(postObj)}
+                {testingLabel(postObj)}
                 <button
                   className="edit-btn"
                   onClick={handleEdit}
