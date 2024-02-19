@@ -1,0 +1,36 @@
+.form-wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  background-color: var(--babypowder);
+  border: 5px solid var(--primary);
+  border-radius: 1rem;
+  width: 80rem;
+}
+
+.form-wrapper > h2 {
+  color: var(--primary);
+}
+
+.form-group {
+  color: var(--primary);
+}
+
+.form-control {
+  color: black;
+}
+
+.btn-container {
+  display: flex;
+  justify-self: flex-end;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+.dropdown {
+  width: 1rem;
+}
+
+.save-btn {
+  color: var(--primary);
+  background-color: var(--lightpink);
+}

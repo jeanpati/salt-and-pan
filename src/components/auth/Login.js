@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { getUserByEmail } from "../../services/userService";
 import { GeneralNav } from "../nav/GeneralNav";
+import "./Login.css";
 
 export const Login = () => {
   const [email, set] = useState("sophia.turner@example.com");

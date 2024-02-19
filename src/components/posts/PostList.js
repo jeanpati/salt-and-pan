@@ -4,7 +4,7 @@ import { Post } from "./Post";
 import { getAllCategories } from "../../services/categoryService";
 import { PostFilterBar } from "./PostFilterBar";
 import { createLike } from "../../services/likesService";
-
+import "./Posts.css";
 export const PostList = ({ currentUser }) => {
   const [allPosts, setAllPosts] = useState([]);
   const [allCategories, setAllCategories] = useState([]);
@@ -64,6 +64,18 @@ export const PostList = ({ currentUser }) => {
     });
   };
 
+  const likeButton = (postObj) => {
+    if (currentUser?.id) {
+      return (
+        <button onClick={handleLike} value={postObj.id}>
+          Like
+        </button>
+      );
+    } else {
+      return "";
+    }
+  };
+
   return (
     <div>
       <PostFilterBar
@@ -77,9 +89,7 @@ export const PostList = ({ currentUser }) => {
             return (
               <div key={postObj.id}>
                 <Post post={postObj} currentUser={currentUser} />
-                <button onClick={handleLike} value={postObj.id}>
-                  Like
-                </button>
+                {likeButton(postObj)}
               </div>
             );
           })}

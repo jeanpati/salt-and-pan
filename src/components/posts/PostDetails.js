@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getPostById } from "../../services/postService";
 import { createLike } from "../../services/likesService";
+import "./Posts.css";
 
 export const PostDetails = ({ currentUser }) => {
   const [clickedPost, setClickedPost] = useState({});
@@ -47,6 +48,19 @@ export const PostDetails = ({ currentUser }) => {
       getAndSetPost();
     });
   };
+
+  const likeButton = (clickedPost) => {
+    if (currentUser?.id) {
+      return (
+        <button onClick={handleLike} value={clickedPost.id}>
+          Like
+        </button>
+      );
+    } else {
+      return "";
+    }
+  };
+
   return (
     <section key={clickedPost.id}>
       <div>
@@ -64,11 +78,7 @@ export const PostDetails = ({ currentUser }) => {
       <div className="body">
         <div>{clickedPost.body} </div>
       </div>
-      <div>
-        <button onClick={handleLike} value={clickedPost.id}>
-          Like
-        </button>
-      </div>
+      <div>{likeButton(clickedPost)}</div>
       <div>
         <div className="likes">{likes()}</div>
       </div>

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createUser, getUserByEmail } from "../../services/userService";
+import "./Login.css";
+import { GeneralNav } from "../nav/GeneralNav";
 
 export const Register = (props) => {
   const [customer, setCustomer] = useState({
@@ -48,6 +50,7 @@ export const Register = (props) => {
 
   return (
     <main style={{ textAlign: "center" }}>
+      <GeneralNav />
       <form className="form-login" onSubmit={handleRegister}>
         <h1>Salt and Pan</h1>
         <h2>Please Register</h2>

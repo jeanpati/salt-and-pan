@@ -59,7 +59,7 @@ export const EditPostForm = ({ currentUser }) => {
   };
 
   return (
-    <form>
+    <form className="form-wrapper">
       <h2>Create Recipe</h2>
       <fieldset>
         <div className="form-group">

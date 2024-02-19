@@ -3,6 +3,8 @@ import { deleteLike, getLikesByUserId } from "../../services/likesService";
 import { getAllCategories } from "../../services/categoryService";
 import { PostFilterBar } from "../posts/PostFilterBar";
 import { Post } from "../posts/Post";
+import "./Favorites.css";
+import logo from "/Users/jean/workspace/salt-and-pan/src/assets/saltandpanlogo.png";
 
 export const Favorites = ({ currentUser }) => {
   const [favoritePosts, setFavoritePosts] = useState([]);
@@ -64,6 +66,10 @@ export const Favorites = ({ currentUser }) => {
 
   return (
     <div>
+      <div className="favorites-header">
+        <h1>Favorites</h1>
+        <img className="favorites-logo" src={logo} alt="" />
+      </div>
       <PostFilterBar
         setChosenCategoryOnly={setChosenCategoryOnly}
         setSearchTerm={setSearchTerm}
@@ -78,7 +84,7 @@ export const Favorites = ({ currentUser }) => {
 
                 <div className="btn-container">
                   <button
-                    className="delete-btn"
+                    className="remove-btn"
                     value={postObj.id}
                     onClick={handleRemove}
                   >

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { editUser, getUserById } from "../services/userService";
+import "./Form.css";
 
 export const EditProfileForm = ({ currentUser }) => {
   const navigate = useNavigate();
