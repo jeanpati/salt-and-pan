@@ -6,6 +6,7 @@ import "./Profile.css";
 
 export const Profile = ({ currentUser }) => {
   const [user, setUser] = useState([]);
+  const [date, setDate] = useState("");
 
   const navigate = useNavigate();
 
@@ -15,6 +16,18 @@ export const Profile = ({ currentUser }) => {
       setUser(userInfo);
     });
   }, [currentUser.id]);
+
+  useEffect(() => {
+    if (user.created) {
+      const createdDate = new Date(user.created);
+      const formatted = Intl.DateTimeFormat("en-US", {
+        month: "long",
+        day: "2-digit",
+        year: "numeric",
+      }).format(createdDate);
+      setDate(formatted);
+    }
+  }, [user]);
 
   const handleEdit = (e) => {
     navigate(`/profile/edit/${currentUser.id}`);
@@ -43,9 +56,9 @@ export const Profile = ({ currentUser }) => {
           </div>
           <div className="user-info">
             <span className="user-info">Date Joined : </span>
-            {user.created}
+            {date}
           </div>
-          <div className="btn-container">
+          <div className="profile-btn-container">
             <button className="edit-btn" onClick={handleEdit}>
               Edit
             </button>

@@ -42,119 +42,115 @@ export const PostForm = ({ currentUser }) => {
   };
 
   return (
-    <section className="form-wrapper">
-      <form>
-        <h2>Create Recipe</h2>
-        <fieldset>
-          <div className="form-group">
-            <label className="form-label">Choose category</label>
-            <select
-              className="form-control"
-              onChange={(e) => {
-                const copy = { ...post };
-                copy.categoryId = e.target.value;
-                setPost(copy);
-              }}
-            >
-              <option value="0">Set category</option>$
-              {allCategories.map((catObj) => {
-                return (
-                  <option key={catObj.id} value={catObj.id}>
-                    {catObj.name}
-                  </option>
-                );
-              })}
-            </select>
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <div className="form-group">
-            <label className="form-label">Title</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter Title"
-              onChange={(e) => {
-                const copy = { ...post };
-                copy.title = e.target.value;
-                setPost(copy);
-              }}
-            />
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <div className="form-group">
-            <label className="form-label">Image Link</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter link to image"
-              onChange={(e) => {
-                const copy = { ...post };
-                copy.img_src = e.target.value;
-                setPost(copy);
-              }}
-            />
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <div className="form-group">
-            <label className="form-label">Body</label>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Enter your recipe"
-              onChange={(e) => {
-                const copy = { ...post };
-                copy.body = e.target.value;
-                setPost(copy);
-              }}
-            />
-          </div>
-        </fieldset>
-        <fieldset>
-          <div className="form-group">
-            <label className="form-label">
-              Make Public :
-              <input
-                type="checkbox"
-                className="form-control"
-                onChange={(e) => {
-                  const copy = { ...post };
-                  copy.isPrivate = e.target.checked;
-                  setPost(copy);
-                }}
-              />
-            </label>
-          </div>
-        </fieldset>
-        <fieldset>
-          <div className="form-group">
-            <label className="form-label">
-              Mark As Testing :
-              <input
-                type="checkbox"
-                className="form-control"
-                onChange={(e) => {
-                  const copy = { ...post };
-                  copy.isTesting = e.target.checked;
-                  setPost(copy);
-                }}
-              />
-            </label>
-          </div>
-        </fieldset>
-      </form>
-      <div className="btn-container">
-        <div className="btn-container">
-          <button className="save-btn" onClick={handleSave}>
-            Save
-          </button>
+    <form className="form-wrapper">
+      <h2>Create Recipe</h2>
+      <fieldset>
+        <div className="form-group">
+          <label className="form-label">Choose category</label>
+          <select
+            className="form-control dropdown"
+            onChange={(e) => {
+              const copy = { ...post };
+              copy.categoryId = e.target.value;
+              setPost(copy);
+            }}
+          >
+            <option value="0">Set category</option>$
+            {allCategories.map((catObj) => {
+              return (
+                <option key={catObj.id} value={catObj.id}>
+                  {catObj.name}
+                </option>
+              );
+            })}
+          </select>
         </div>
+      </fieldset>
+
+      <fieldset>
+        <div className="form-group">
+          <label className="form-label">Title</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Enter Title"
+            onChange={(e) => {
+              const copy = { ...post };
+              copy.title = e.target.value;
+              setPost(copy);
+            }}
+          />
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <div className="form-group">
+          <label className="form-label">Image Link</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Enter link to image"
+            onChange={(e) => {
+              const copy = { ...post };
+              copy.img_src = e.target.value;
+              setPost(copy);
+            }}
+          />
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <div className="form-group">
+          <label className="form-label">Body</label>
+          <textarea
+            type="text"
+            className="form-control body"
+            placeholder="Enter your recipe"
+            onChange={(e) => {
+              const copy = { ...post };
+              copy.body = e.target.value;
+              setPost(copy);
+            }}
+          />
+        </div>
+      </fieldset>
+      <fieldset>
+        <div className="form-group">
+          <label className="form-label">
+            Make Public :
+            <input
+              type="checkbox"
+              className="form-control checkbox"
+              onChange={(e) => {
+                const copy = { ...post };
+                copy.isPrivate = e.target.checked;
+                setPost(copy);
+              }}
+            />
+          </label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <div className="form-group">
+          <label className="form-label">
+            Mark As Testing :
+            <input
+              type="checkbox"
+              className="form-control checkbox"
+              onChange={(e) => {
+                const copy = { ...post };
+                copy.isTesting = e.target.checked;
+                setPost(copy);
+              }}
+            />
+          </label>
+        </div>
+      </fieldset>
+      <div className="form-btn-container">
+        <button className="save-btn" onClick={handleSave}>
+          Save
+        </button>
       </div>
-    </section>
+    </form>
   );
 };

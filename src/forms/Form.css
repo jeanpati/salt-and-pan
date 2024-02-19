@@ -6,6 +6,7 @@
   border: 5px solid var(--primary);
   border-radius: 1rem;
   width: 80rem;
+  padding: 2rem;
 }
 
 .form-wrapper > h2 {
@@ -16,21 +17,34 @@
   color: var(--primary);
 }
 
+.form-label {
+  font-size: 1.2rem;
+}
 .form-control {
   color: black;
 }
 
-.btn-container {
+.form-btn-container {
   display: flex;
   justify-self: flex-end;
   justify-content: flex-end;
   margin-bottom: 1rem;
 }
 .dropdown {
-  width: 1rem;
+  width: 18rem;
 }
 
 .save-btn {
-  color: var(--primary);
-  background-color: var(--lightpink);
+  color: var(--babypowder);
+  background-color: var(--primary);
+}
+.body {
+  height: fit-content;
+  min-height: 18rem;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  width: 1rem;
 }

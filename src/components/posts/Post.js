@@ -12,11 +12,12 @@ export const Post = ({ post }) => {
   return (
     <section className="post" key={post.id}>
       <Link to={`/posts/${post.id}`}>
-        {post.title}
+        <p className="result-title">{post.title}</p>
         <div className="image">
           <img src={post.img_src} alt="" />
         </div>
       </Link>
+      <p>{post.user?.username}</p>
       <div className="likes">{likes()}</div>
     </section>
   );

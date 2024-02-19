@@ -38,7 +38,7 @@ export const EditPostForm = ({ currentUser }) => {
         created: post.created,
         lastEdited: new Date(),
         userId: currentUser.id,
-        categoryId: post.categoryId,
+        categoryId: parseInt(post.categoryId),
       };
       editPost(editedPost).then(navigate("/myrecipes"));
     } else {
@@ -60,7 +60,7 @@ export const EditPostForm = ({ currentUser }) => {
 
   return (
     <form className="form-wrapper">
-      <h2>Create Recipe</h2>
+      <h2>Edit Recipe</h2>
       <fieldset>
         <div className="form-group">
           <select
@@ -115,9 +115,9 @@ export const EditPostForm = ({ currentUser }) => {
       <fieldset>
         <div className="form-group">
           <label>Body</label>
-          <input
+          <textarea
             type="text"
-            className="form-control"
+            className="form-control body"
             name="body"
             placeholder="Enter your recipe"
             onChange={handleInputChange}
@@ -158,8 +158,10 @@ export const EditPostForm = ({ currentUser }) => {
       </fieldset>
 
       <fieldset>
-        <div className="form-group">
-          <button onClick={handleSave}>Save</button>
+        <div className="form-btn-container">
+          <button className="save-btn" onClick={handleSave}>
+            Save
+          </button>
         </div>
       </fieldset>
     </form>

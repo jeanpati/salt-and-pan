@@ -103,8 +103,8 @@ export const MyRecipes = ({ currentUser }) => {
               <div className="post-card" key={postObj.id}>
                 <Post post={postObj} currentUser={currentUser}></Post>
                 <div className="label-container">
-                  {privateLabel(postObj)}
                   {testingLabel(postObj)}
+                  {privateLabel(postObj)}
                 </div>
                 <div className="btn-container">
                   <button

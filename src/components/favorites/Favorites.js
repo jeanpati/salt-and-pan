@@ -55,11 +55,13 @@ export const Favorites = ({ currentUser }) => {
   }, [searchTerm, favoritePosts]);
 
   const handleRemove = (e) => {
-    for (const like of likes) {
-      if (like.postId === parseInt(e.target.value)) {
-        deleteLike(like.id).then(() => {
-          getAndSetLikes();
-        });
+    if (window.confirm("Are you sure?")) {
+      for (const like of likes) {
+        if (like.postId === parseInt(e.target.value)) {
+          deleteLike(like.id).then(() => {
+            getAndSetLikes();
+          });
+        }
       }
     }
   };
@@ -79,9 +81,8 @@ export const Favorites = ({ currentUser }) => {
         <article className="posts">
           {filteredPosts.map((postObj) => {
             return (
-              <div className="post-card" key={postObj.id}>
+              <div className="post-card" key={postObj.id} post={postObj}>
                 <Post post={postObj}></Post>
-
                 <div className="btn-container">
                   <button
                     className="remove-btn"

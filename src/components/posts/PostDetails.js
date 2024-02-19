@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getPostById } from "../../services/postService";
-import { createLike } from "../../services/likesService";
+import { createLike, getLikesByPostId } from "../../services/likesService";
 import "./Posts.css";
 
 export const PostDetails = ({ currentUser }) => {
   const [clickedPost, setClickedPost] = useState({});
+  const [postLikes, setPostLikes] = useState([]);
   const [date, setDate] = useState(new Date());
   const { id } = useParams();
 
@@ -18,6 +19,13 @@ export const PostDetails = ({ currentUser }) => {
   useEffect(() => {
     getAndSetPost();
   }, [id]);
+
+  useEffect(() => {
+    getLikesByPostId(clickedPost?.id).then((data) => {
+      const l = data;
+      setPostLikes(l);
+    });
+  }, [clickedPost]);
 
   const likes = () => {
     if (clickedPost.likes?.length > 1) {
@@ -51,8 +59,21 @@ export const PostDetails = ({ currentUser }) => {
 
   const likeButton = (clickedPost) => {
     if (currentUser?.id) {
+      for (const like of postLikes) {
+        if (parseInt(like?.userId) === parseInt(currentUser.id)) {
+          return (
+            <button className="liked-btn" value={clickedPost.id}>
+              Liked!
+            </button>
+          );
+        }
+      }
       return (
-        <button onClick={handleLike} value={clickedPost.id}>
+        <button
+          className="like-btn"
+          onClick={handleLike}
+          value={clickedPost.id}
+        >
           Like
         </button>
       );
@@ -61,26 +82,39 @@ export const PostDetails = ({ currentUser }) => {
     }
   };
 
+  const testingLabel = (postObj) => {
+    if (postObj?.isTesting === true) {
+      return <label className="label">Testing</label>;
+    }
+  };
+
+  const privateLabel = (postObj) => {
+    if (postObj.isPrivate === true) {
+      return <label className="label">Private</label>;
+    }
+  };
+
   return (
-    <section key={clickedPost.id}>
-      <div>
+    <section className="details-card" key={clickedPost.id}>
+      <div className="details-item">
         <h2 className="title">{clickedPost?.title}</h2>
       </div>
-      <div>
-        <div className="date">{date.toString()}</div>
+      <div className="date-bar">
+        <div className="details-item">
+          <div className="date">{date.toString()}</div>
+        </div>
+        <div className="details-item testing">{testingLabel(clickedPost)}</div>
+        <div className="details-item private">{privateLabel(clickedPost)}</div>
       </div>
-      <div>
-        <span></span>
-      </div>
-      <div className="image">
+      <div className="details-item">
         <img src={clickedPost.img_src} alt="" />
       </div>
-      <div className="body">
-        <div>{clickedPost.body} </div>
+      <div className="details-item">
+        <p className="body">{clickedPost.body}</p>
       </div>
-      <div>{likeButton(clickedPost)}</div>
-      <div>
-        <div className="likes">{likes()}</div>
+      <div className="likes-bar">
+        <div className="details-item likes">{likes()}</div>
+        <div className="details-item">{likeButton(clickedPost)}</div>
       </div>
     </section>
   );
