@@ -1,0 +1,37 @@
+.navbar {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  background-color: var(--primary);
+  margin: 0;
+}
+
+.navbar-container {
+  display: flex;
+  width: 100%;
+}
+
+.navbar-item {
+  font-size: 1.2rem;
+  flex-basis: 25%;
+  list-style-type: none;
+  text-align: left;
+  color: var(--babypowder);
+  margin: 1rem 2rem;
+}
+
+.navbar-link {
+  text-decoration: none;
+  font-family: "Lexend Deca", sans-serif;
+  letter-spacing: 1.5px;
+}
+
+.navbar-link:hover {
+  color: var(--lightpink);
+}
+
+.navbar-logout {
+  display: flex;
+  justify-content: flex-end;
+  flex-basis: 100%;
+}

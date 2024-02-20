@@ -4,9 +4,10 @@ import { Post } from "./Post";
 import { getAllCategories } from "../../services/categoryService";
 import { PostFilterBar } from "./PostFilterBar";
 import { createLike } from "../../services/likesService";
-
+import "./Posts.css";
 export const PostList = ({ currentUser }) => {
   const [allPosts, setAllPosts] = useState([]);
+  const [publicPosts, setPublicPosts] = useState([]);
   const [allCategories, setAllCategories] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [showChosenCategoryOnly, setChosenCategoryOnly] = useState(0);
@@ -29,6 +30,11 @@ export const PostList = ({ currentUser }) => {
   }, []);
 
   useEffect(() => {
+    const p = allPosts.filter((post) => post.isPrivate === false);
+    setPublicPosts(p);
+  }, [allPosts]);
+
+  useEffect(() => {
     getAllCategories().then((allCategoriesArr) => {
       setAllCategories(allCategoriesArr);
     });
@@ -36,23 +42,23 @@ export const PostList = ({ currentUser }) => {
 
   useEffect(() => {
     if (showChosenCategoryOnly === "0") {
-      setFilteredPosts(allPosts);
+      setFilteredPosts(publicPosts);
     } else if (showChosenCategoryOnly) {
-      const filteredPosts = allPosts.filter(
+      const filteredPosts = publicPosts.filter(
         (post) => post.categoryId === parseInt(showChosenCategoryOnly)
       );
       setFilteredPosts(filteredPosts);
     } else {
-      setFilteredPosts(allPosts);
+      setFilteredPosts(publicPosts);
     }
-  }, [allPosts, showChosenCategoryOnly]);
+  }, [publicPosts, showChosenCategoryOnly]);
 
   useEffect(() => {
-    const foundPosts = allPosts.filter((post) =>
+    const foundPosts = publicPosts.filter((post) =>
       post.title.toLowerCase().includes(searchTerm.toLocaleLowerCase())
     );
     setFilteredPosts(foundPosts);
-  }, [searchTerm, allPosts]);
+  }, [searchTerm, publicPosts]);
 
   const handleLike = (e) => {
     const likedPost = {
@@ -62,6 +68,23 @@ export const PostList = ({ currentUser }) => {
     createLike(likedPost).then(() => {
       getAndSetPosts();
     });
+  };
+
+  const likeButton = (postObj) => {
+    if (currentUser?.id) {
+      for (const like of postObj.likes) {
+        if (parseInt(like?.userId) === parseInt(currentUser.id)) {
+          return <button className="liked-btn">Liked!</button>;
+        }
+      }
+      return (
+        <button className="like-btn" onClick={handleLike} value={postObj.id}>
+          Like
+        </button>
+      );
+    } else {
+      return "";
+    }
   };
 
   return (
@@ -75,11 +98,9 @@ export const PostList = ({ currentUser }) => {
         <article className="posts">
           {filteredPosts.map((postObj) => {
             return (
-              <div key={postObj.id}>
+              <div className="post-card" key={postObj.id}>
                 <Post post={postObj} currentUser={currentUser} />
-                <button onClick={handleLike} value={postObj.id}>
-                  Like
-                </button>
+                {likeButton(postObj)}
               </div>
             );
           })}

@@ -1,0 +1,20 @@
+.favorites-header {
+  display: flex;
+}
+
+.favorites-header > h1 {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 3rem;
+  color: var(--primary);
+  margin-left: 5.5rem;
+}
+
+.favorites-logo {
+  width: 8rem;
+  height: fit-content;
+}
+
+.remove-btn {
+  background-color: var(--secondary);
+}

@@ -1,13 +1,13 @@
 export const getLikesByUserId = (userId) => {
   return fetch(
-    `http://localhost:8088/likes?userId=${userId}&_expand=post`
+    `http://localhost:8088/likes?userId=${userId}&_expand=post&_expand=user`
   ).then((res) => res.json());
 };
 
 export const getLikesByPostId = (postId) => {
-  return fetch(`http://localhost:8088/likes?postId=${postId}`).then((res) =>
-    res.json()
-  );
+  return fetch(
+    `http://localhost:8088/likes?postId=${postId}&_expand=user`
+  ).then((res) => res.json());
 };
 
 export const deleteLike = (likeId) => {

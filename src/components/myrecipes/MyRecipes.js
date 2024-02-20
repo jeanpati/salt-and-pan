@@ -4,6 +4,8 @@ import { getAllCategories } from "../../services/categoryService";
 import { useNavigate } from "react-router-dom";
 import { PostFilterBar } from "../posts/PostFilterBar";
 import { Post } from "../posts/Post";
+import "./MyRecipes.css";
+import logo from "/Users/jean/workspace/salt-and-pan/src/assets/saltandpanlogo.png";
 
 export const MyRecipes = ({ currentUser }) => {
   const [myPosts, setMyPosts] = useState([]);
@@ -16,20 +18,12 @@ export const MyRecipes = ({ currentUser }) => {
 
   const privateLabel = (postObj) => {
     if (postObj.isPrivate === true) {
-      return (
-        <div>
-          <label>Private</label>
-        </div>
-      );
+      return <label className="label">Private</label>;
     }
   };
   const testingLabel = (postObj) => {
     if (postObj.isTesting === true) {
-      return (
-        <div>
-          <label>Testing</label>
-        </div>
-      );
+      return <label className="label">Testing</label>;
     }
   };
 
@@ -70,9 +64,11 @@ export const MyRecipes = ({ currentUser }) => {
   }, [searchTerm, myPosts]);
 
   const handleDelete = (e) => {
-    deletePost(e.target.value).then(() => {
-      getAndSetPosts();
-    });
+    if (window.confirm("Are you sure?")) {
+      deletePost(e.target.value).then(() => {
+        getAndSetPosts();
+      });
+    }
   };
 
   const handleEdit = (e) => {
@@ -80,36 +76,44 @@ export const MyRecipes = ({ currentUser }) => {
   };
 
   return (
-    <div>
-      <button
-        className="create-btn"
-        onClick={() => {
-          navigate("/newpost");
-        }}
-      >
-        Create Recipe
-      </button>
+    <div className="myrecipes-container">
+      <div className="myrecipes-header">
+        <h1>My Recipes</h1>
+        <img className="myrecipes-logo" src={logo} alt="" />
+      </div>
       <PostFilterBar
         setChosenCategoryOnly={setChosenCategoryOnly}
         setSearchTerm={setSearchTerm}
         allCategories={allCategories}
       />
       <div className="posts-container">
+        <div className="create-btn-container">
+          <button
+            className="create-btn"
+            onClick={() => {
+              navigate("/newpost");
+            }}
+          >
+            Create Recipe
+          </button>
+        </div>
         <article className="posts">
           {filteredPosts.map((postObj) => {
             return (
               <div className="post-card" key={postObj.id}>
                 <Post post={postObj} currentUser={currentUser}></Post>
-                {privateLabel(postObj)}
-                {testingLabel(postObj)}
-                <button
-                  className="edit-btn"
-                  onClick={handleEdit}
-                  value={postObj.id}
-                >
-                  Edit
-                </button>
+                <div className="label-container">
+                  {testingLabel(postObj)}
+                  {privateLabel(postObj)}
+                </div>
                 <div className="btn-container">
+                  <button
+                    className="edit-btn"
+                    onClick={handleEdit}
+                    value={postObj.id}
+                  >
+                    Edit
+                  </button>
                   <button
                     className="delete-btn"
                     value={postObj.id}

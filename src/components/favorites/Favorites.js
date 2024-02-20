@@ -3,6 +3,8 @@ import { deleteLike, getLikesByUserId } from "../../services/likesService";
 import { getAllCategories } from "../../services/categoryService";
 import { PostFilterBar } from "../posts/PostFilterBar";
 import { Post } from "../posts/Post";
+import "./Favorites.css";
+import logo from "/Users/jean/workspace/salt-and-pan/src/assets/saltandpanlogo.png";
 
 export const Favorites = ({ currentUser }) => {
   const [favoritePosts, setFavoritePosts] = useState([]);
@@ -53,17 +55,23 @@ export const Favorites = ({ currentUser }) => {
   }, [searchTerm, favoritePosts]);
 
   const handleRemove = (e) => {
-    for (const like of likes) {
-      if (like.postId === parseInt(e.target.value)) {
-        deleteLike(like.id).then(() => {
-          getAndSetLikes();
-        });
+    if (window.confirm("Are you sure?")) {
+      for (const like of likes) {
+        if (like.postId === parseInt(e.target.value)) {
+          deleteLike(like.id).then(() => {
+            getAndSetLikes();
+          });
+        }
       }
     }
   };
 
   return (
     <div>
+      <div className="favorites-header">
+        <h1>Favorites</h1>
+        <img className="favorites-logo" src={logo} alt="" />
+      </div>
       <PostFilterBar
         setChosenCategoryOnly={setChosenCategoryOnly}
         setSearchTerm={setSearchTerm}
@@ -73,12 +81,11 @@ export const Favorites = ({ currentUser }) => {
         <article className="posts">
           {filteredPosts.map((postObj) => {
             return (
-              <div className="post-card" key={postObj.id}>
+              <div className="post-card" key={postObj.id} post={postObj}>
                 <Post post={postObj}></Post>
-
                 <div className="btn-container">
                   <button
-                    className="delete-btn"
+                    className="remove-btn"
                     value={postObj.id}
                     onClick={handleRemove}
                   >

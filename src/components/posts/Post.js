@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "./Posts.css";
 
 export const Post = ({ post }) => {
   const likes = () => {
@@ -9,11 +10,14 @@ export const Post = ({ post }) => {
     }
   };
   return (
-    <section key={post.id}>
-      <Link to={`/posts/${post.id}`}>{post.title}</Link>
-      <div className="image">
-        <img src={post.img_src} alt="" />
-      </div>
+    <section className="post" key={post.id}>
+      <Link to={`/posts/${post.id}`}>
+        <p className="result-title">{post.title}</p>
+        <div className="image">
+          <img src={post.img_src} alt="" />
+        </div>
+      </Link>
+      <p>{post.user?.username}</p>
       <div className="likes">{likes()}</div>
     </section>
   );

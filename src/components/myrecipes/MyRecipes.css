@@ -1,0 +1,61 @@
+.post-card {
+  margin: 1rem 0;
+}
+.btn-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+.edit-btn {
+  background-color: var(--lightpink);
+  margin: 0 1rem;
+}
+.delete-btn {
+  background-color: var(--secondary);
+}
+.create-btn {
+  background-color: var(--primary);
+}
+.create-btn-container {
+  display: flex;
+  justify-content: flex-end;
+}
+.myrecipes-header {
+  display: flex;
+}
+
+.myrecipes-header > h1 {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 3rem;
+  color: var(--primary);
+  margin-left: 5.5rem;
+}
+
+.myrecipes-logo {
+  width: 8rem;
+  height: fit-content;
+}
+
+.posts-container {
+  width: fit-content;
+  min-width: 30rem;
+  display: flex;
+  flex-flow: column;
+}
+
+.label-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.label {
+  display: flex;
+  justify-content: center;
+  width: 8rem;
+  margin: 0 1rem;
+  border: 2px solid var(--primary);
+  border-radius: 5rem;
+  background-color: var(--babyblue);
+}

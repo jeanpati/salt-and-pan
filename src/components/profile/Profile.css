@@ -1,0 +1,44 @@
+.profile-header {
+  display: flex;
+}
+
+.profile-header > h1 {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 3rem;
+  color: var(--primary);
+  margin-left: 5.5rem;
+}
+
+.profile-logo {
+  width: 8rem;
+  height: fit-content;
+}
+
+.profile-wrapper {
+  display: flex;
+  padding: 2rem 5rem;
+}
+.profile-card {
+  display: flex;
+  flex-flow: column nowrap;
+  border: 5px solid var(--primary);
+  border-radius: 0.8rem;
+  width: 80rem;
+  padding: 3rem;
+}
+
+.profile-btn-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.user-info {
+  font-size: 1.25rem;
+  margin: 0.3rem 0;
+  list-style: none;
+}
+
+.user-header {
+  color: var(--primary);
+}

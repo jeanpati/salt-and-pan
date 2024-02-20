@@ -1,0 +1,98 @@
+/* Import the google web fonts you want to use */
+@import url("https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&display=swap");
+
+/* FONTS
+font-family: "Libre Bodoni", serif;
+font-family: "Lexend Deca", sans-serif;
+*/
+
+/* COLOR PALETTE */
+/* https://coolors.co/ is a great resource */
+:root {
+  --primary: #004225;
+  --secondary: #f96900;
+  --burgundy: #721121;
+  --white: #ffffff;
+  --babypowder: #fdfffc;
+  --linen: #feefe5;
+  --lightpink: #fcd4d4;
+  --appBackground: #fdfffc;
+}
+
+.libre-bodoni {
+  font-family: "Libre Bodoni", serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.lexend-deca {
+  font-family: "Lexend Deca", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* GLOBAL STYLES */
+body,
+button,
+input,
+select,
+textarea {
+  font-family: "Lexend Deca", sans-serif;
+}
+
+body {
+  background-color: var(--appBackground);
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Libre Bodoni", serif;
+}
+
+/* This prevents all the links in the app from having default underline */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+/* This prevents all the links in the app from turning purple after visiting */
+a:visited {
+  color: inherit;
+}
+/* This prevents all the inputs in the app from having that blue outline when in focus */
+input:focus {
+  outline: none;
+}
+
+/* GLOBAL STYLING FOR ALL THE BUTTONS */
+button {
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  color: var(--white);
+  cursor: pointer;
+}
+
+/* These are all the color options for the buttons */
+/* If you change the color variables, be sure to change the hover colors to be a darker shade of the colors you chose*/
+.btn-primary {
+  background-color: var(--primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--secondary);
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--primary);
+}

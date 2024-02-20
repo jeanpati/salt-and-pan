@@ -1,0 +1,90 @@
+.home-container {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.header {
+  display: flex;
+  justify-content: center;
+}
+
+/* This targets any h1 that is a child of an element with the .welcome-container class */
+.header > h1 {
+  display: flex;
+  font-size: 5rem;
+  color: var(--primary);
+  background-color: var(--babypowder);
+}
+
+.logo {
+  width: 18rem;
+  height: fit-content;
+}
+
+.popular {
+  background: var(--linen);
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.popular > h2 {
+  display: flex;
+  color: var(--burgundy);
+  justify-content: center;
+  margin-left: 3rem;
+  font-size: 2.5rem;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.carousel-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.carousel-container {
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+}
+
+.carousel-item {
+  min-width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  transition: 0.5s cubic-bezier(1, 1, 1, 1);
+}
+
+.left-arrow,
+.right-arrow {
+  font-size: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--babypowder);
+  width: 4rem;
+  height: 10rem;
+  background-color: var(--linen);
+}
+
+.highlights {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+  background-color: var(--primary);
+}
+
+.highlight-item > h2 {
+  font-size: 2rem;
+  color: var(--babypowder);
+  letter-spacing: 0.5px;
+}
+.highlight-item {
+  display: flex;
+  flex-flow: column;
+}

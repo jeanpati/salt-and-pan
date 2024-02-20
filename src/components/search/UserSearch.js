@@ -1,9 +1,15 @@
 import { PostList } from "../posts/PostList";
+import logo from "/Users/jean/workspace/salt-and-pan/src/assets/saltandpanlogo.png";
+import "./Search.css";
 
-export const UserSearch = () => {
+export const UserSearch = ({ currentUser }) => {
   return (
     <section className="search-page">
-      <PostList />
+      <div className="search-header">
+        <h1>Search</h1>
+        <img className="search-logo" src={logo} alt="" />
+      </div>
+      <PostList currentUser={currentUser} />
     </section>
   );
 };

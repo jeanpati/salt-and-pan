@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
 import "./Form.css";
+import { useEffect, useState } from "react";
 import { getAllCategories } from "../services/categoryService";
 import { createPost } from "../services/postService";
 import { useNavigate } from "react-router-dom";
+
 export const PostForm = ({ currentUser }) => {
   const [post, setPost] = useState({
     title: "",
@@ -41,12 +42,13 @@ export const PostForm = ({ currentUser }) => {
   };
 
   return (
-    <form>
+    <form className="form-wrapper">
       <h2>Create Recipe</h2>
       <fieldset>
         <div className="form-group">
+          <label className="form-label">Choose category</label>
           <select
-            className="form-control"
+            className="form-control dropdown"
             onChange={(e) => {
               const copy = { ...post };
               copy.categoryId = e.target.value;
@@ -67,7 +69,7 @@ export const PostForm = ({ currentUser }) => {
 
       <fieldset>
         <div className="form-group">
-          <label>Title</label>
+          <label className="form-label">Title</label>
           <input
             type="text"
             className="form-control"
@@ -83,7 +85,7 @@ export const PostForm = ({ currentUser }) => {
 
       <fieldset>
         <div className="form-group">
-          <label>Image Link</label>
+          <label className="form-label">Image Link</label>
           <input
             type="text"
             className="form-control"
@@ -99,10 +101,10 @@ export const PostForm = ({ currentUser }) => {
 
       <fieldset>
         <div className="form-group">
-          <label>Body</label>
-          <input
+          <label className="form-label">Body</label>
+          <textarea
             type="text"
-            className="form-control"
+            className="form-control body"
             placeholder="Enter your recipe"
             onChange={(e) => {
               const copy = { ...post };
@@ -114,11 +116,11 @@ export const PostForm = ({ currentUser }) => {
       </fieldset>
       <fieldset>
         <div className="form-group">
-          <label>
+          <label className="form-label">
             Make Public :
             <input
               type="checkbox"
-              className="form-control"
+              className="form-control checkbox"
               onChange={(e) => {
                 const copy = { ...post };
                 copy.isPrivate = e.target.checked;
@@ -130,11 +132,11 @@ export const PostForm = ({ currentUser }) => {
       </fieldset>
       <fieldset>
         <div className="form-group">
-          <label>
+          <label className="form-label">
             Mark As Testing :
             <input
               type="checkbox"
-              className="form-control"
+              className="form-control checkbox"
               onChange={(e) => {
                 const copy = { ...post };
                 copy.isTesting = e.target.checked;
@@ -144,11 +146,11 @@ export const PostForm = ({ currentUser }) => {
           </label>
         </div>
       </fieldset>
-      <fieldset>
-        <div className="form-group">
-          <button onClick={handleSave}>Save</button>
-        </div>
-      </fieldset>
+      <div className="form-btn-container">
+        <button className="save-btn" onClick={handleSave}>
+          Save
+        </button>
+      </div>
     </form>
   );
 };

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { editUser, getUserById } from "../services/userService";
+import "./Form.css";
 
 export const EditProfileForm = ({ currentUser }) => {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ export const EditProfileForm = ({ currentUser }) => {
   };
 
   return (
-    <form className="profile">
+    <form className="form-wrapper">
       <h2>Edit Profile</h2>
       <fieldset>
         <div className="form-group">
@@ -70,7 +71,7 @@ export const EditProfileForm = ({ currentUser }) => {
           <input
             type="text"
             name="bio"
-            value={user.bio}
+            value={user.bio ? user.bio : ""}
             onChange={handleInputChange}
             required
             className="form-control"
@@ -78,8 +79,8 @@ export const EditProfileForm = ({ currentUser }) => {
         </div>
       </fieldset>
       <fieldset>
-        <div className="form-group">
-          <button className="form-btn btn-primary" onClick={handleSave}>
+        <div className="form-btn-container">
+          <button className="save-btn" onClick={handleSave}>
             Save Profile
           </button>
         </div>
